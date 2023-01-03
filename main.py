@@ -1,6 +1,7 @@
 import pygame as pg
 
 from board import Board
+from get_random_figure import get_random_figure
 
 FPS = 50
 SIZE = WIDTH, HEIGHT = 450, 625
@@ -13,7 +14,8 @@ def main():
     clock = pg.time.Clock()
     running = True
     board = Board(screen=screen)
-    
+    current_figures = get_random_figure()
+    current_figure_position_in_list = 1
     
     while running:
         for event in pg.event.get():
