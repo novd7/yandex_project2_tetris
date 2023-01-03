@@ -1,9 +1,9 @@
 figures = [
     [
         [
-         'ooxxo',
-         'oxxoo',
-         'ooooo'],
+            'ooxxo',
+            'oxxoo',
+            'ooooo'],
         ['ooxoo',
          'ooxxo',
          'oooxo']
@@ -33,7 +33,6 @@ figures = [
     [
         ['oooxo',
          'oxxxo',
-         'ooooo',
          'ooooo'],
         ['ooxoo',
          'ooxoo',
@@ -62,22 +61,15 @@ figures = [
     [
         ['ooxoo',
          'oxxxo',
-         'ooooo',
          'ooooo'],
-        ['ooooo',
-         'ooxoo',
+        ['ooxoo',
          'ooxxo',
-         'ooxoo',
-         'ooooo'],
+         'ooxoo'],
         ['ooooo',
-         'ooooo',
          'oxxxo',
-         'ooxoo',
-         'ooooo'],
-        ['ooooo',
-         'ooxoo',
+         'ooxoo'],
+        ['ooxoo',
          'oxxoo',
-         'ooxoo',
-         'ooooo']
+         'ooxoo']
     ]
 ]
