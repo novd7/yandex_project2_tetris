@@ -1,10 +1,11 @@
 from random import randint
+
 import pygame as pg
-all_sprites = []
+
 
 class T(pg.sprite.Sprite):
     def __init__(self, x, y):
-        super().__init__(all_sprites)
+        super().__init__(all_sprites, current)
         self.orientations = {
             1: ['oxo',
                 'xxx'],
@@ -39,14 +40,13 @@ class T(pg.sprite.Sprite):
                     )
     
     def update(self, *keys):
-        if not pg.sprite.spritecollideany(self, platforms):
-            self.rect = self.rect.move(0, 1)
-            return
-        if keys:
-            keys = keys[0]
-            if keys[pg.K_LEFT] or keys[pg.K_a]:
-                self.rect = self.rect.move(-1, 0)
-            elif keys[pg.K_RIGHT] or keys[pg.K_d]:
-                self.rect = self.rect.move(1, 0)
-
-T(0, 0)
+        if not pg.sprite.spritecollideany(self, borders):
+            for i in self.all_cubes:
+                i.move(0, 1)
+        #     return
+        # if keys:
+        #     keys = keys[0]
+        #     if keys[pg.K_LEFT] or keys[pg.K_a]:
+        #         self.rect = self.rect.move(-1, 0)
+        #     elif keys[pg.K_RIGHT] or keys[pg.K_d]:
+        #         self.rect = self.rect.move(1, 0)
