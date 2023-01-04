@@ -1,19 +1,23 @@
 import pygame as pg
 
+from constants import WIDTH_OF_PLAYGROUND, \
+    HEIGHT_OF_PLAYGROUND, INDENT_LEFT, INDENT_TOP, \
+    CELL_SIZE, CELL_COLOR, MARKED_CELL_COLOR
+
 
 class Board:
     # creating of the board
-    def __init__(self, screen, width=13, height=24):
+    def __init__(self, screen, width=WIDTH_OF_PLAYGROUND, height=HEIGHT_OF_PLAYGROUND):
         self.width = width
         self.height = height
-        self.board = [["" for i in range(width)] for j in range(height)]
+        self.data = [["" for i in range(width)] for j in range(height)]
         self.coords_of_cubes_to_draw = []
         # coords of cubes (figures consist of them) to draw
         
         # default values
-        self.left = 10
-        self.top = 10
-        self.cell_size = 25
+        self.left = INDENT_LEFT
+        self.top = INDENT_TOP
+        self.cell_size = CELL_SIZE
         self.screen = screen
     
     # settings of the front view
@@ -28,10 +32,16 @@ class Board:
             for coord_y, y in enumerate(range(self.top, self.height * self.cell_size + self.top, self.cell_size)):
                 pg.draw.rect(
                     screen,
-                    'white',
+                    CELL_COLOR,
                     (x, y, self.cell_size, self.cell_size),
                     width=1
                 )
+                if self.data[coord_y][coord_x]:
+                    pg.draw.rect(
+                        screen,
+                        MARKED_CELL_COLOR,
+                        (x, y, self.cell_size, self.cell_size)
+                    )
     
     def get_click(self, mouse_pos):
         cell = self.get_cell(mouse_pos)
@@ -49,8 +59,6 @@ class Board:
     
     def on_click(self, cell):
         try:
-            print("board.py:50", cell, self.board[cell[0]][cell[1]])
+            print("board.py:50", cell, self.data[cell[0]][cell[1]])
         except TypeError:
             print("board.py:52 You're out of board")
-            
-    

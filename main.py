@@ -1,10 +1,10 @@
 import pygame as pg
 
+import draw_figure
 from board import Board
 from get_random_figure import get_random_figure
-
-FPS = 50
-SIZE = WIDTH, HEIGHT = 450, 625
+from draw_figure import draw_figure
+from constants import BACK_GROUND_COLOR, FPS, SIZE
 
 
 def main():
@@ -15,8 +15,8 @@ def main():
     running = True
     board = Board(screen=screen)
     current_figures = get_random_figure()
-    current_figure_position_in_list = 1
-    
+    current_figure_position_in_list = 0
+    draw_figure(current_figures, current_figure_position_in_list, 0, 3, board)
     while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -25,8 +25,8 @@ def main():
             if event.type == pg.MOUSEBUTTONDOWN:
                 if event.button == 1:
                     board.get_click(event.pos)
-        
-        screen.fill('black')
+            
+        screen.fill(BACK_GROUND_COLOR)
         board.render()
         pg.display.flip()
         clock.tick(FPS)
