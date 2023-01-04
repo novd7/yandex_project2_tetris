@@ -8,6 +8,7 @@ from constants import BACK_GROUND_COLOR, FPS, SIZE, SPEED_OF_FIGURE_FALLING
 from draw_figure import draw_figure
 from get_random_figure import get_random_figure
 from move_figure import move_figure
+from remove_filled_rows import remove_filled_rows
 
 
 def main():
@@ -65,6 +66,7 @@ def main():
                 # TODO: the end of the game
                 print("main.py:26 the game is over")
                 return
+        remove_filled_rows(board=board)
         falling_counter += 1
         screen.fill(BACK_GROUND_COLOR)
         board.render()
