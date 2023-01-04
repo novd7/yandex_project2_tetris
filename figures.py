@@ -1,9 +1,8 @@
 figures = [
     [
-        [
-            'ooxxo',
-            'oxxoo',
-            'ooooo'],
+        ['ooxxo',
+         'oxxoo',
+         'ooooo'],
         ['ooxoo',
          'ooxxo',
          'oooxo']
