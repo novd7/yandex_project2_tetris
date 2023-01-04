@@ -27,7 +27,6 @@ def draw_figure(cur_figure: list, pos_in_list: int, up_row_to_draw: int, left_co
         slices_of_needed_rows.append([])
         for j in range(left_col_to_draw, left_col_to_draw + len(figure[0])):
             slices_of_needed_rows[-1].append(board_copy[i][j])
-    print(figure)
     print(slices_of_needed_rows)
     may_draw = True
     for i in range(len(figure)):
@@ -35,13 +34,13 @@ def draw_figure(cur_figure: list, pos_in_list: int, up_row_to_draw: int, left_co
             if figure[i][j] == "o":
                 continue
             elif figure[i][j] == "x":
-                if slices_of_needed_rows[i][j] in ("", "o", "@"):
+                if slices_of_needed_rows[i][j] in ("", "o"):
                     continue
-            else:
-                may_draw = False
-    if not may_draw:
-        print("draw_figure.py:42 ERROR")
-        return False
+                else:
+                    may_draw = False
+    print("may_draw", may_draw)
+    if may_draw == False:
+        return may_draw
     else:
         for i in range(up_row_to_draw, up_row_to_draw + len(figure)):
             print("bci", board_copy[i], figure[0])

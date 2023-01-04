@@ -1,3 +1,5 @@
+import sys
+
 import pygame as pg
 
 import draw_figure
@@ -17,10 +19,12 @@ def main():
     board = Board(screen=screen)
     current_figures = get_random_figure()
     current_figure_position_in_list = 0
-    result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 3, board)
-    if not result_of_drawing:
+    result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 5, board)
+    print("result_of_drawing", result_of_drawing)
+    if result_of_drawing == False:
         # TODO: the end of the game
-        pass
+        print("main.py:26 the game is over")
+        return
     # We will fall a figure not every iteration of loop
     falling_counter = 0
     last_keys = None
@@ -30,10 +34,6 @@ def main():
                 running = False
                 print(board.data)
                 break
-            # if event.type == pg.MOUSEBUTTONDOWN:
-            #     if event.button == 1:
-            #         board.get_click(event.pos)
-        # print(34)
         keys = pg.key.get_pressed()
         if keys[pg.K_UP]:
             # TODO: turn the figure
@@ -60,7 +60,11 @@ def main():
         if should_draw_new_figure:
             current_figures = get_random_figure()
             current_figure_position_in_list = 0
-            draw_figure(current_figures, current_figure_position_in_list, 0, 3, board)
+            result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 5, board)
+            if result_of_drawing == False:
+                # TODO: the end of the game
+                print("main.py:26 the game is over")
+                return
         falling_counter += 1
         screen.fill(BACK_GROUND_COLOR)
         board.render()
