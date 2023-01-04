@@ -28,6 +28,7 @@ def main():
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
+                print(board.data)
                 break
             # if event.type == pg.MOUSEBUTTONDOWN:
             #     if event.button == 1:
@@ -38,8 +39,7 @@ def main():
             # TODO: turn the figure
             pass
         if keys[pg.K_DOWN]:
-            if last_keys != str(keys):
-                move_figure(board=board, direction='down')
+            move_figure(board=board, direction='down')
         if keys[pg.K_LEFT]:
             if last_keys != str(keys):
                 move_figure(board=board, direction='left')
@@ -49,6 +49,18 @@ def main():
         if falling_counter % (1 / SPEED_OF_FIGURE_FALLING) == 0:
             move_figure(board=board, direction='down')
         last_keys = str(keys)
+        should_draw_new_figure = True
+        for i in board.data:
+            for j in i:
+                if j == "@":
+                    should_draw_new_figure = False
+                    break
+            if not should_draw_new_figure:
+                break
+        if should_draw_new_figure:
+            current_figures = get_random_figure()
+            current_figure_position_in_list = 0
+            draw_figure(current_figures, current_figure_position_in_list, 0, 3, board)
         falling_counter += 1
         screen.fill(BACK_GROUND_COLOR)
         board.render()
