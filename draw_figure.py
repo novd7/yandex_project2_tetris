@@ -60,21 +60,3 @@ def draw_figure(cur_figure: list, pos_in_list: int, up_row_to_draw: int, left_co
             figure.pop(0)
     board.data = board_copy.copy()
     pprint(board.data)
-
-
-if __name__ == "__main__":
-    # Test
-    draw_figure([
-        ['ooxoo',
-         'oxxxo',
-         'ooooo'],
-        ['ooxoo',
-         'ooxxo',
-         'ooxoo'],
-        ['ooooo',
-         'oxxxo',
-         'ooxoo'],
-        ['ooxoo',
-         'oxxoo',
-         'ooxoo']
-    ], 0, 0, 0)
