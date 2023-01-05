@@ -8,6 +8,7 @@ from get_random_figure import get_random_figure
 from move_figure import move_figure
 from remove_filled_rows import remove_filled_rows
 from turn_figure import turn_figure
+from draw_score import draw_score
 
 
 def main():
@@ -73,6 +74,7 @@ def main():
         falling_counter += 1
         screen.fill(BACK_GROUND_COLOR)
         board.render()
+        draw_score(screen, 100)
         pg.display.flip()
         clock.tick(FPS)
 
