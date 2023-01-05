@@ -34,5 +34,5 @@ class Board:
                     pg.draw.rect(
                         screen,
                         MARKED_CELL_COLOR,
-                        (x, y, self.cell_size, self.cell_size)
+                        (x + 1, y + 1, self.cell_size - 1, self.cell_size - 1)
                     )
