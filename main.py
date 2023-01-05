@@ -1,5 +1,3 @@
-import sys
-
 import pygame as pg
 
 import draw_figure
@@ -9,6 +7,7 @@ from draw_figure import draw_figure
 from get_random_figure import get_random_figure
 from move_figure import move_figure
 from remove_filled_rows import remove_filled_rows
+from turn_figure import turn_figure
 
 
 def main():
@@ -37,8 +36,12 @@ def main():
                 break
         keys = pg.key.get_pressed()
         if keys[pg.K_UP]:
-            # TODO: turn the figure
-            pass
+            if last_keys != str(keys):
+                current_figure_position_in_list = turn_figure(
+                    cur_figure=current_figures,
+                    pos_in_list=current_figure_position_in_list,
+                    board=board
+                )
         if keys[pg.K_DOWN]:
             move_figure(board=board, direction='down')
         if keys[pg.K_LEFT]:
