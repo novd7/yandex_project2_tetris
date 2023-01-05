@@ -2,13 +2,14 @@ import pygame as pg
 
 import draw_figure
 from board import Board
-from constants import BACK_GROUND_COLOR, FPS, SIZE, SPEED_OF_FIGURE_FALLING
+from constants import BACK_GROUND_COLOR, FPS, SIZE, SPEED_OF_FIGURE_FALLING, \
+    INDENT_LEFT, INDENT_TOP, WIDTH_OF_PLAYGROUND, CELL_SIZE, TEXT_SCORE_SIZE, TEXT_NEXT_SIZE
 from draw_figure import draw_figure
 from get_random_figure import get_random_figure
 from move_figure import move_figure
 from remove_filled_rows import remove_filled_rows
 from turn_figure import turn_figure
-from draw_score import draw_score
+from draw_text import draw_text
 
 
 def main():
@@ -19,6 +20,15 @@ def main():
     running = True
     board = Board(screen=screen)
     current_figures = get_random_figure()
+    next_figure = get_random_figure()
+    next_figure_board = Board(screen=screen)
+    next_figure_board.width = 4
+    next_figure_board.height = 4
+    next_figure_board.left = INDENT_LEFT + WIDTH_OF_PLAYGROUND * CELL_SIZE + INDENT_LEFT
+    next_figure_board.top = INDENT_TOP + TEXT_SCORE_SIZE + TEXT_SCORE_SIZE +\
+        INDENT_TOP + INDENT_TOP + TEXT_NEXT_SIZE + TEXT_NEXT_SIZE + INDENT_TOP
+    next_figure_board.data = [[j if j == "x" else "" for j in i] for i in next_figure[0]]
+    
     current_figure_position_in_list = 0
     result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 5, board)
     print("result_of_drawing", result_of_drawing)
@@ -64,7 +74,9 @@ def main():
                 break
         if should_draw_new_figure:
             score += 1
-            current_figures = get_random_figure()
+            current_figures = next_figure
+            next_figure = get_random_figure()
+            next_figure_board.data = [[j if j == "x" else "" for j in i] for i in next_figure[0]]
             current_figure_position_in_list = 0
             result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 5, board)
             if result_of_drawing == False:
@@ -75,7 +87,8 @@ def main():
         falling_counter += 1
         screen.fill(BACK_GROUND_COLOR)
         board.render()
-        draw_score(screen, score)
+        next_figure_board.render()
+        draw_text(screen, score)
         pg.display.flip()
         clock.tick(FPS)
 

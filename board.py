@@ -30,9 +30,12 @@ class Board:
                     (x, y, self.cell_size, self.cell_size),
                     width=1
                 )
-                if self.data[coord_y][coord_x]:
-                    pg.draw.rect(
-                        screen,
-                        MARKED_CELL_COLOR,
-                        (x + 1, y + 1, self.cell_size - 1, self.cell_size - 1)
-                    )
+                try:
+                    if self.data[coord_y][coord_x]:
+                        pg.draw.rect(
+                            screen,
+                            MARKED_CELL_COLOR,
+                            (x + 1, y + 1, self.cell_size - 1, self.cell_size - 1)
+                        )
+                except IndexError:
+                    continue
