@@ -68,6 +68,3 @@ def move_figure(board: board.Board, direction='down'):
             for j in range(len(board_copy[i])):
                 if board_copy[i][j] == "@":
                     board_copy[i][j] = "x"
-    
-                
-                

@@ -5,7 +5,6 @@ import board
 
 def draw_figure(cur_figure: list, pos_in_list: int, up_row_to_draw: int, left_col_to_draw: int, board: board.Board):
     board_copy = board.data.copy()
-    # board_copy = [["" for i in range(13)] for j in range(24)]
     figure = cur_figure[pos_in_list]
     for i in figure:
         if "x" not in i:
@@ -48,11 +47,9 @@ def draw_figure(cur_figure: list, pos_in_list: int, up_row_to_draw: int, left_co
             print(figure)
             print("!", board_copy[i][left_col_to_draw: left_col_to_draw + len(figure[0])])
             print("!!", [j if j == "x" else "" for j in figure[0]])
-            # board_copy[i][left_col_to_draw: left_col_to_draw + len(figure[0])] = \
-            #     [i if i == "x" else "" for i in figure.pop(0)]
             print(f"board_copy[{i}][{left_col_to_draw}: {left_col_to_draw + len(figure[0])}]")
             print(figure)
-
+            
             value = ["@" if j == "x" else "" for j in figure[0]]
             right_bound = left_col_to_draw + len(figure[0])
             board_copy[i][left_col_to_draw: right_bound] = value

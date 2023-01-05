@@ -3,7 +3,6 @@ from math import inf
 from pprint import pprint
 
 import board
-from figures import figures
 
 
 def turn_figure(cur_figure: list, pos_in_list: int, board: board.Board):
@@ -82,7 +81,7 @@ def turn_figure(cur_figure: list, pos_in_list: int, board: board.Board):
                     except IndexError:
                         pprint(board_copy)
                         print(f"[{max_value_of_row} + {used_rows_down}][{j}]")
-                        
+                
                 else:
                     needed_additional_rows -= 1
             else:
@@ -113,7 +112,7 @@ def turn_figure(cur_figure: list, pos_in_list: int, board: board.Board):
                     except IndexError:
                         pprint(board_copy)
                         print(f"[{i}][{min_value_of_column} - {used_columns_left}]")
-                        
+                
                 else:
                     needed_additional_columns -= 1
             elif may_go_right and needed_additional_columns:
@@ -130,7 +129,7 @@ def turn_figure(cur_figure: list, pos_in_list: int, board: board.Board):
                     except IndexError:
                         pprint(board_copy)
                         print(f"[{i}][{max_value_of_row} - {used_rows_down}]")
-                        
+                
                 else:
                     needed_additional_columns -= 1
             else:
@@ -164,40 +163,3 @@ def turn_figure(cur_figure: list, pos_in_list: int, board: board.Board):
         board.data = board_copy.copy()
         print("---------------------------------------------------------")
     return pos_in_list
-            
-        
-#
-#
-#
-#         # Test
-# if __name__ == "__main__":
-#     class B:
-#         def __init__(self):
-#             self.data = [['', '', '', '', '', '@', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', '@', '@', '@', '', '', '', '', ''],
-#                          ['', '', '', '', '', '', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', '', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', '', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', '', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', '', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', '', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', 'x', '', '', '', '', '', '', ''],
-#                          ['', '', '', 'x', 'x', 'x', '', '', '', '', '', '', ''],
-#                          ['', '', '', 'x', '', '', '', '', '', '', '', '', ''],
-#                          ['', '', '', 'x', 'x', 'x', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', 'x', '', '', '', '', '', '', ''],
-#                          ['', '', '', 'x', 'x', 'x', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', '', 'x', '', '', '', '', '', '', ''],
-#                          ['', '', '', 'x', 'x', 'x', '', '', '', '', '', '', ''],
-#                          ['', '', '', '', 'x', 'x', '', '', '', '', '', '', ''],
-#                          ['', '', '', 'x', 'x', '', '', '', '', '', '', '', ''],
-#                          ['x', '', '', 'x', '', '', '', '', '', '', '', '', ''],
-#                          ['x', '', '', 'x', 'x', 'x', '', 'x', 'x', '', '', '', ''],
-#                          ['x', '', '', '', 'x', 'x', 'x', 'x', 'x', 'x', 'x', '', ''],
-#                          ['x', '', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', 'x', '', ''],
-#                          ['x', 'x', 'x', '', '', 'x', '', '', 'x', '', 'x', 'x', ''],
-#                          ['x', 'x', 'x', 'x', 'x', 'x', '', 'x', 'x', 'x', '', 'x', 'x']]
-#
-#
-#     b = B()
-#     turn_figure(1, 1, b)
