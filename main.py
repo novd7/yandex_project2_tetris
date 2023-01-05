@@ -14,7 +14,7 @@ from draw_score import draw_score
 def main():
     pg.display.set_caption('Тетрис')
     screen = pg.display.set_mode(SIZE)
-    
+    score = 0
     clock = pg.time.Clock()
     running = True
     board = Board(screen=screen)
@@ -63,6 +63,7 @@ def main():
             if not should_draw_new_figure:
                 break
         if should_draw_new_figure:
+            score += 1
             current_figures = get_random_figure()
             current_figure_position_in_list = 0
             result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 5, board)
@@ -70,11 +71,11 @@ def main():
                 # TODO: the end of the game
                 print("main.py:26 the game is over")
                 return
-        remove_filled_rows(board=board)
+        score += remove_filled_rows(board=board)
         falling_counter += 1
         screen.fill(BACK_GROUND_COLOR)
         board.render()
-        draw_score(screen, 100)
+        draw_score(screen, score)
         pg.display.flip()
         clock.tick(FPS)
 
