@@ -15,3 +15,11 @@ TEXT_SCORE_SIZE = 34
 TEXT_SCORE_COLOR = (100, 255, 100)
 TEXT_NEXT_SIZE = 20
 TEXT_NEXT_COLOR = (178, 102, 255)
+
+TETRIS_LOGO_SIZE = (464, 116)  # Размер логотипа игры
+START_SCREEN_BUTTONS = (('Играть', (125, 300, 225, 40), (70, 5)),  # (button_text, button_rect, text_indents)
+                        ('Статистика', (125, 370, 225, 40), (40, 5)),
+                        ('Выйти', (125, 440, 225, 40), (72, 5)))
+BUTTON_COLOR = (66, 170, 66)  # (150, 150, 150)  # Цвет кнопки
+BUTTON_TARGETED_COLOR = (100, 255, 100)  # Цвет кнопки, на которую наведён курсор
+BUTTON_TEXT_COLOR = (0, 0, 0)  # Цвет текста на кнопках

@@ -2,6 +2,7 @@ import pygame as pg
 
 import draw_figure
 from board import Board
+from start_screen import start_screen
 from constants import BACK_GROUND_COLOR, FPS, SIZE, SPEED_OF_FIGURE_FALLING, \
     INDENT_LEFT, INDENT_TOP, WIDTH_OF_PLAYGROUND, CELL_SIZE, TEXT_SCORE_SIZE, TEXT_NEXT_SIZE
 from draw_figure import draw_figure
@@ -13,6 +14,7 @@ from draw_text import draw_text
 
 
 def main():
+    start_screen()
     pg.display.set_caption('Тетрис')
     screen = pg.display.set_mode(SIZE)
     score = 0
