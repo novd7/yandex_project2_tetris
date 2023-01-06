@@ -3,6 +3,7 @@ from constants import WIDTH_OF_PLAYGROUND, HEIGHT_OF_PLAYGROUND
 
 
 def remove_filled_rows(board: board.Board):
+    """Function to remove filled rows and returns score for removed rows"""
     board_copy = board.data.copy()
     count_removed_rows = 0
     while True:

@@ -2,6 +2,7 @@ import board
 
 
 def move_figure(board: board.Board, direction='down'):
+    """Method to move falling figure to left, right or down"""
     board_copy = board.data.copy()
     may_move = True
     may_move_down = True

@@ -6,6 +6,7 @@ import board
 
 
 def turn_figure(cur_figure: list, pos_in_list: int, board: board.Board):
+    """Method to turn falling figure"""
     print("pos_in_list", pos_in_list)
     board_copy = board.data.copy()
     may_turn_figure = True

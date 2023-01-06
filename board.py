@@ -6,7 +6,8 @@ from constants import WIDTH_OF_PLAYGROUND, \
 
 
 class Board:
-    # creating of the board
+    """Class of board where figures are situated"""
+    
     def __init__(self, screen, width=WIDTH_OF_PLAYGROUND, height=HEIGHT_OF_PLAYGROUND):
         self.width = width
         self.height = height
@@ -21,6 +22,7 @@ class Board:
         self.screen = screen
     
     def render(self):
+        """Method to draw a board on screen using default parameters"""
         screen = self.screen
         for coord_x, x in enumerate(range(self.left, self.width * self.cell_size + self.left, self.cell_size)):
             for coord_y, y in enumerate(range(self.top, self.height * self.cell_size + self.top, self.cell_size)):

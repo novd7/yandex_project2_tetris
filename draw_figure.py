@@ -4,6 +4,7 @@ import board
 
 
 def draw_figure(cur_figure: list, pos_in_list: int, up_row_to_draw: int, left_col_to_draw: int, board: board.Board):
+    """Function to 'draw figure' (add it to board.data list where all figures are storing)"""
     board_copy = board.data.copy()
     figure = cur_figure[pos_in_list]
     for i in figure:

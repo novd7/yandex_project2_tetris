@@ -1,3 +1,5 @@
+"""File where all constants are situated"""
+
 PROGRAM_NAME = "Тетрис"
 SIZE = WIDTH, HEIGHT = 475, 625
 FPS = 50

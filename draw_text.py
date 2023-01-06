@@ -7,6 +7,7 @@ from database import get_max_score_by_name
 
 
 def draw_text(screen, score, level, name):
+    """Function to draw text"""
     text_x = INDENT_LEFT + WIDTH_OF_PLAYGROUND * CELL_SIZE + INDENT_LEFT
     
     def draw_line_of_text(text: str, color: tuple, y):

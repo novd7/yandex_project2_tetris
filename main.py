@@ -14,6 +14,7 @@ from turn_figure import turn_figure
 
 
 def main(name='Vladimir'):
+    """Function of game process"""
     pg.display.set_caption(PROGRAM_NAME)
     screen = pg.display.set_mode(SIZE)
     score = 0

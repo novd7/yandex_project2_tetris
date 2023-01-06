@@ -1,3 +1,5 @@
+"""List of all figures and its available positions"""
+
 figures = [
     [
         ['oxx',
