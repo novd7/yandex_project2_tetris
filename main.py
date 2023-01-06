@@ -2,20 +2,26 @@ import pygame as pg
 
 import draw_figure
 from board import Board
-from constants import BACK_GROUND_COLOR, FPS, SIZE, INITIAL_SPEED_OF_FIGURE_FALLING, \
-    INDENT_LEFT, WIDTH_OF_PLAYGROUND, CELL_SIZE, PROGRAM_NAME, DELTA_SPEED_FOR_LEVEL, SCORE_TO_SWITCH_LEVEL
+from constants import BACK_GROUND_COLOR, FPS, SIZE, INDENT_LEFT, WIDTH_OF_PLAYGROUND, CELL_SIZE, GAME_SCREEN_BUTTONS, \
+    BUTTON_COLOR, BUTTON_TARGETED_COLOR
+from constants import INITIAL_SPEED_OF_FIGURE_FALLING, \
+    PROGRAM_NAME, DELTA_SPEED_FOR_LEVEL, SCORE_TO_SWITCH_LEVEL
 from database import insert_score_in_database
+from draw_button import draw_button
 from draw_figure import draw_figure
 from draw_text import draw_text
 from get_random_figure import get_random_figure
 from move_figure import move_figure
 from remove_filled_rows import remove_filled_rows
+from start_screen import start_screen
 from turn_figure import turn_figure
 
 
 def main(name='Vladimir'):
     """Function of game process"""
+    start_screen()
     pg.display.set_caption(PROGRAM_NAME)
+    pg.display.set_caption('Тетрис')
     screen = pg.display.set_mode(SIZE)
     score = 0
     level = score // SCORE_TO_SWITCH_LEVEL + 1
@@ -30,6 +36,9 @@ def main(name='Vladimir'):
     next_figure_board.left = INDENT_LEFT + WIDTH_OF_PLAYGROUND * CELL_SIZE + INDENT_LEFT
     next_figure_board.top = 255
     next_figure_board.data = [[j if j == "x" else "" for j in i] for i in next_figure[0]]
+    
+    font = pg.font.Font(None, 27)  # Шрифт для кнопок "Пауза" и "Конец игры"
+    mouse_pos = (0, 0)  # Изначальные кординаты курсора
     
     current_figure_position_in_list = 0
     result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 5, board)
@@ -48,6 +57,8 @@ def main(name='Vladimir'):
                 running = False
                 print(board.data)
                 break
+            if event.type == pg.MOUSEMOTION:
+                mouse_pos = event.pos  # Координаты курсора
         keys = pg.key.get_pressed()
         if keys[pg.K_UP]:
             if last_keys != str(keys):
@@ -97,6 +108,18 @@ def main(name='Vladimir'):
         board.render()
         next_figure_board.render()
         draw_text(screen, score, level, name)
+        
+        # Отрисовка кнопок "Пауза" и "Конец игры"
+        if 345 <= mouse_pos[0] <= 465 and 540 <= mouse_pos[1] <= 570:  # Проверки позиции курсора
+            draw_button(screen, GAME_SCREEN_BUTTONS[0], BUTTON_TARGETED_COLOR, font)
+            draw_button(screen, GAME_SCREEN_BUTTONS[1], BUTTON_COLOR, font)
+        elif 345 <= mouse_pos[0] <= 465 and 580 <= mouse_pos[1] <= 610:
+            draw_button(screen, GAME_SCREEN_BUTTONS[1], BUTTON_TARGETED_COLOR, font)
+            draw_button(screen, GAME_SCREEN_BUTTONS[0], BUTTON_COLOR, font)
+        else:
+            for button in GAME_SCREEN_BUTTONS:
+                draw_button(screen, button, BUTTON_COLOR, font)
+        
         pg.display.flip()
         clock.tick(FPS)
 
