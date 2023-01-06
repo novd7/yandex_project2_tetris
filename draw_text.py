@@ -1,31 +1,43 @@
 import pygame as pg
 
 from constants import INDENT_LEFT, INDENT_TOP, \
-    WIDTH_OF_PLAYGROUND, CELL_SIZE, TEXT_SCORE_SIZE, \
-    TEXT_SCORE_COLOR, TEXT_NEXT_SIZE, TEXT_NEXT_COLOR
+    WIDTH_OF_PLAYGROUND, CELL_SIZE, TEXT_SIZE, \
+    TEXT_SCORE_COLOR
+from database import get_max_score_by_name
 
 
-def draw_text(screen, score):
-    font = pg.font.Font(None, 50)
+def draw_text(screen, score, level, name):
+    text_x = INDENT_LEFT + WIDTH_OF_PLAYGROUND * CELL_SIZE + INDENT_LEFT
     
-    text1 = font.render("Счёт:", True, TEXT_SCORE_COLOR)
-    text1_x = INDENT_LEFT + WIDTH_OF_PLAYGROUND * CELL_SIZE + INDENT_LEFT
-    text1_y = INDENT_TOP
-    screen.blit(text1, (text1_x, text1_y))
+    def draw_line_of_text(text: str, color: tuple, y):
+        font = pg.font.Font(None, 30)
+        text = font.render(text, True, color)
+        screen.blit(text, (text_x, y))
     
-    text2 = font.render(str(score), True, TEXT_SCORE_COLOR)
-    text2_x = text1_x
-    text2_y = text1_y + TEXT_SCORE_SIZE
-    screen.blit(text2, (text2_x, text2_y))
+    text_y_score = INDENT_TOP
+    draw_line_of_text("Счёт:", TEXT_SCORE_COLOR, text_y_score)
     
-    font3 = pg.font.Font(None, 30)
+    text_y_score_num = text_y_score + TEXT_SIZE
+    draw_line_of_text(str(score), TEXT_SCORE_COLOR, text_y_score_num)
     
-    text3 = font3.render("Следующая", True, TEXT_NEXT_COLOR)
-    text3_x = text1_x
-    text3_y = text2_y + TEXT_SCORE_SIZE + INDENT_TOP + INDENT_TOP
-    screen.blit(text3, (text3_x, text3_y))
+    text_y_level = text_y_score_num + TEXT_SIZE + 20
+    draw_line_of_text("Уровень:", TEXT_SCORE_COLOR, text_y_level)
     
-    text4 = font3.render("фигура:", True, TEXT_NEXT_COLOR)
-    text4_x = text1_x
-    text4_y = text3_y + TEXT_NEXT_SIZE
-    screen.blit(text4, (text4_x, text4_y))
+    text_y_level_num = text_y_level + TEXT_SIZE
+    draw_line_of_text(str(level), TEXT_SCORE_COLOR, text_y_level_num)
+    
+    text_y_your_best = text_y_level_num + TEXT_SIZE + 20
+    draw_line_of_text("Ваш лучший", TEXT_SCORE_COLOR, text_y_your_best)
+    
+    text_y_result = text_y_your_best + TEXT_SIZE
+    draw_line_of_text("результат:", TEXT_SCORE_COLOR, text_y_result)
+    
+    text_y_result_num = text_y_result + TEXT_SIZE
+    res = get_max_score_by_name(name)
+    draw_line_of_text(str(max(res) if res else 0), TEXT_SCORE_COLOR, text_y_result_num)
+    
+    text_y_next = text_y_result_num + TEXT_SIZE + 20
+    draw_line_of_text("Следующая", TEXT_SCORE_COLOR, text_y_next)
+    
+    text_y_figure = text_y_next + TEXT_SIZE
+    draw_line_of_text("фигура:", TEXT_SCORE_COLOR, text_y_figure)

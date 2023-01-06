@@ -5,6 +5,7 @@ def create_bd():
     try:
         open("data.sqlite")
     except FileNotFoundError:
+        print(1231)
         con = sqlite3.connect("data.sqlite")
         cur = con.cursor()
         cur.execute("""
@@ -21,7 +22,7 @@ def insert_score_in_database(name: str, score: int):
     con = sqlite3.connect("data.sqlite")
     cur = con.cursor()
     cur.execute(f"""
-                INSERT INTO words (name, score)
+                INSERT INTO data (name, score)
                 VALUES ('{name}', {score})
             """)
     con.commit()
@@ -35,4 +36,4 @@ def get_max_score_by_name(name: str = None):
         return max(data)
     else:
         data = cur.execute(f"""SELECT score FROM data WHERE name = '{name}'""").fetchall()
-        return max(data)
+        return max(data if data else (0, 0))
