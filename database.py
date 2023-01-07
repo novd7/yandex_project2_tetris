@@ -35,8 +35,8 @@ def get_max_score_by_name(name: str = None):
     con = sqlite3.connect("data.sqlite")
     cur = con.cursor()
     if name is None:
-        data = cur.execute("""SELECT score FROM data""").fetchall()
-        return max(data)
+        data = cur.execute("""SELECT name, score FROM data""").fetchall()
+        return data
     else:
         data = cur.execute(f"""SELECT score FROM data WHERE name = '{name}'""").fetchall()
         return max(data if data else (0, 0))

@@ -1,4 +1,7 @@
 import pygame as pg
+import os
+import sys
+import sqlite3
 
 import draw_figure
 from board import Board
@@ -15,11 +18,22 @@ from move_figure import move_figure
 from remove_filled_rows import remove_filled_rows
 from start_screen import start_screen
 from turn_figure import turn_figure
+from database import create_bd
+from PyQt5.QtWidgets import QInputDialog
+from PyQt5.QtWidgets import QWidget, QApplication
+from get_name_from_dialog import GetName
 
 
 def main(name='Vladimir'):
     """Function of game process"""
     start_screen()
+    
+    app = QApplication(sys.argv)
+    name = GetName()
+    name = name.get_name()
+    print("name =", name)
+    if not os.path.exists("data.sqlite"):
+        create_bd()
     pg.display.set_caption(PROGRAM_NAME)
     pg.display.set_caption('Тетрис')
     screen = pg.display.set_mode(SIZE)
