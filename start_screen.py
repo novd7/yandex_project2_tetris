@@ -56,7 +56,7 @@ def start_screen():
                     elif 370 <= event.pos[1] <= 410:
                         statistics_screen(screen)
                     elif 440 <= event.pos[1] <= 480:
-                        terminate()
+                        sys.exit()
 
         cycle_iterations += 1
         if cycle_iterations == 10:  # Кадр логотипа и цвет декораций меняется на каждой 5-ой итерации цикла

@@ -74,7 +74,7 @@ def end_screen(score, max_score):
         if cycle_iterations == 10:  # Кадр логотипа, цвет и положение декораций меняется на каждой 10-ой итерации цикла
             cycle_iterations = 0
             logo_animation(screen, logo_frame, 'game_over')
-
+    
             if deco_frame == 0:
                 deco_text = deco_font.render('× - ' * 9 + '×', True, BACK_GROUND_COLOR)
                 screen.blit(deco_text, (12, 10))
@@ -89,7 +89,8 @@ def end_screen(score, max_score):
                 deco_frame = 0
             screen.blit(deco_text, (12, 10))
             screen.blit(deco_text, (12, 580))
-
+    
+            max_score = max_score if type(max_score) == int else max_score[0]
             if score > max_score:  # TODO: Comparison with max score
                 if new_record_color == 0:
                     new_record = new_record_font.render('Новый рекорд!', True, BACK_GROUND_COLOR)
@@ -102,7 +103,7 @@ def end_screen(score, max_score):
                     new_record = new_record_font.render('Новый рекорд!', True, NEW_RECORD_COLOR[new_record_color])
                     new_record_color = 0
                 screen.blit(new_record, (110, 420))
-
+    
             deco_color += 1
             if deco_color > 2:
                 deco_color = 0

@@ -58,8 +58,9 @@ def main():
     print("result_of_drawing", result_of_drawing)
     if result_of_drawing == False:
         from end_screen import end_screen
-        end_screen(score, get_max_score_by_name(name))
+        max_score = get_max_score_by_name(name)
         insert_score_in_database(name, score)
+        end_screen(score, max_score)
         print("main.py:26 the game is over")
         return
     # We will fall a figure not every iteration of loop
@@ -81,9 +82,9 @@ def main():
                     print("pause")
                 elif 345 <= mouse_pos[0] <= 465 and 580 <= mouse_pos[1] <= 610:
                     from end_screen import end_screen
-                    end_screen(score, get_max_score_by_name(name))
-                    insert_score_in_database(name, score)  # TODO: get_max_score_by_name for end_screen()
-                    print("main.py:26 the game is over")
+                    max_score = get_max_score_by_name(name)
+                    insert_score_in_database(name, score)
+                    end_screen(score, max_score)
                     return
         keys = pg.key.get_pressed()
         if keys[pg.K_UP]:
@@ -133,8 +134,9 @@ def main():
             if result_of_drawing == False:
                 score -= 1
                 from end_screen import end_screen
-                end_screen(score, get_max_score_by_name(name))  # TODO: get_max_score_by_name for end_screen()
+                max_score = get_max_score_by_name(name)
                 insert_score_in_database(name, score)
+                end_screen(score, max_score)
                 print("main.py:26 the game is over")
                 return
         score += remove_filled_rows(board=board)
