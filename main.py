@@ -9,27 +9,26 @@ from constants import BACK_GROUND_COLOR, FPS, SIZE, INDENT_LEFT, WIDTH_OF_PLAYGR
     BUTTON_COLOR, BUTTON_TARGETED_COLOR
 from constants import INITIAL_SPEED_OF_FIGURE_FALLING, \
     PROGRAM_NAME, DELTA_SPEED_FOR_LEVEL, SCORE_TO_SWITCH_LEVEL
-from database import insert_score_in_database
+from database import insert_score_in_database, create_bd, \
+    get_max_score_by_name
 from draw_button import draw_button
 from draw_figure import draw_figure
 from draw_text import draw_text
 from get_random_figure import get_random_figure
 from move_figure import move_figure
 from remove_filled_rows import remove_filled_rows
-from start_screen import start_screen
 from turn_figure import turn_figure
-from database import create_bd
 from PyQt5.QtWidgets import QInputDialog
 from PyQt5.QtWidgets import QWidget, QApplication
 from get_name_from_dialog import GetName
+from terminate import terminate
 
 
 def main():
     """Function of game process"""
     if not os.path.exists("data.sqlite"):
         create_bd()
-    start_screen()
-    
+
     app = QApplication(sys.argv)
     name = GetName()
     name = name.get_name()
@@ -58,20 +57,23 @@ def main():
     result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 5, board)
     print("result_of_drawing", result_of_drawing)
     if result_of_drawing == False:
-        # TODO: the end of the game
+        from end_screen import end_screen
+        max_score = get_max_score_by_name(name)
         insert_score_in_database(name, score)
+        end_screen(score, max_score)
         print("main.py:26 the game is over")
         return
     # We will fall a figure not every iteration of loop
     falling_counter = 0
     last_keys = None
+
     is_paused = False
     while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
                 running = False
                 print(board.data)
-                break
+                terminate()
             if event.type == pg.MOUSEMOTION:
                 mouse_pos = event.pos  # Координаты курсора
             if event.type == pg.MOUSEBUTTONDOWN:
@@ -79,8 +81,11 @@ def main():
                     is_paused = not is_paused
                     print("pause")
                 elif 345 <= mouse_pos[0] <= 465 and 580 <= mouse_pos[1] <= 610:
-                    # TODO: the end of the game
-                    print("break")
+                    from end_screen import end_screen
+                    max_score = get_max_score_by_name(name)
+                    insert_score_in_database(name, score)
+                    end_screen(score, max_score)
+                    return
         keys = pg.key.get_pressed()
         if keys[pg.K_UP]:
             if last_keys != str(keys):
@@ -128,8 +133,10 @@ def main():
             result_of_drawing = draw_figure(current_figures, current_figure_position_in_list, 0, 5, board)
             if result_of_drawing == False:
                 score -= 1
-                # TODO: the end of the game
+                from end_screen import end_screen
+                max_score = get_max_score_by_name(name)
                 insert_score_in_database(name, score)
+                end_screen(score, max_score)
                 print("main.py:26 the game is over")
                 return
         score += remove_filled_rows(board=board)
@@ -157,5 +164,6 @@ def main():
 
 if __name__ == '__main__':
     pg.init()
-    main()
+    from start_screen import start_screen
+    start_screen()
     pg.quit()

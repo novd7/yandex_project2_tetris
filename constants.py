@@ -23,9 +23,7 @@ TEXT_SCORE_SIGN_COLOR = (66, 170, 66)
 TEXT_NEXT_SIZE = 10
 TEXT_NEXT_COLOR = (178, 102, 255)
 
-
 TETRIS_LOGO_SIZE = (464, 98)  # Размер логотипа игры
-TETRIS_LOGO_SPRITES = [f'data/tetris_logo/tetris_logo_{num}.png' for num in range(1, 15)]
 START_SCREEN_BUTTONS = (('Играть', (125, 300, 225, 40), (70, 5)),  # (button_text, button_rect, text_indents)
                         ('Статистика', (125, 370, 225, 40), (40, 5)),
                         ('Выйти', (125, 440, 225, 40), (72, 5)))
@@ -36,3 +34,11 @@ DECO_TEXT_COLOR = ((98, 0, 196), (136, 17, 255), (178, 102, 255))  # Цвета 
 
 GAME_SCREEN_BUTTONS = (('Пауза', (345, 540, 120, 30), (35, 4)),  # (button_text, button_rect, text_indents)
                        ('Конец игры', (345, 580, 120, 30), (8, 4)))
+
+GAME_OVER_SIZE = (309, 215)  # Размер надписи "GAME OVER"
+END_SCREEN_BUTTONS = (('Новая игра', (30, 520, 200, 40), (35, 7)),  # (button_text, button_rect, text_indents)
+                      ('В главное меню', (250, 520, 200, 40), (4, 7)))
+NEW_RECORD_COLOR = ((255, 187, 0), (255, 231, 166))
+
+STATISTICS_SCREEN_BUTTON = ('Назад', (125, 520, 225, 40), (72, 5))  # (button_text, button_rect, text_indents)
+TOP_10_SIGN_COLOR = (0, 140, 255)
