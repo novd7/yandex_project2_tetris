@@ -14,7 +14,9 @@ class GetName(QWidget):
         ok_pressed = False
         con = sqlite3.connect("data.sqlite")
         cur = con.cursor()
-        data = cur.execute("""SELECT name FROM data ORDER BY -id""").fetchone()
+        data = cur.execute("""SELECT name FROM data ORDER BY id DESC""").fetchone()
+        if not data:
+            data = [""]
         while not name or not ok_pressed:
             name, ok_pressed = QInputDialog.getText(self, "Введите имя",
                                                     "Как Вас зовут?", text=data[0])

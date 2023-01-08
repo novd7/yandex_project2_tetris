@@ -24,16 +24,16 @@ from PyQt5.QtWidgets import QWidget, QApplication
 from get_name_from_dialog import GetName
 
 
-def main(name='Vladimir'):
+def main():
     """Function of game process"""
+    if not os.path.exists("data.sqlite"):
+        create_bd()
     start_screen()
     
     app = QApplication(sys.argv)
     name = GetName()
     name = name.get_name()
     print("name =", name)
-    if not os.path.exists("data.sqlite"):
-        create_bd()
     pg.display.set_caption(PROGRAM_NAME)
     pg.display.set_caption('Тетрис')
     screen = pg.display.set_mode(SIZE)
@@ -89,7 +89,8 @@ def main(name='Vladimir'):
         if keys[pg.K_RIGHT]:
             if last_keys != str(keys):
                 move_figure(board=board, direction='right')
-        if falling_counter % (1 / (INITIAL_SPEED_OF_FIGURE_FALLING + DELTA_SPEED_FOR_LEVEL * (level - 1))) <= 0.2:
+        print(falling_counter % (1 / (INITIAL_SPEED_OF_FIGURE_FALLING + DELTA_SPEED_FOR_LEVEL * (level - 1))))
+        if falling_counter % (round(1 / (INITIAL_SPEED_OF_FIGURE_FALLING + DELTA_SPEED_FOR_LEVEL * (level - 1)))) == 0:
             move_figure(board=board, direction='down')
         
         last_keys = str(keys)
