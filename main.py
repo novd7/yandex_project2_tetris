@@ -65,6 +65,7 @@ def main():
     # We will fall a figure not every iteration of loop
     falling_counter = 0
     last_keys = None
+    is_paused = False
     while running:
         for event in pg.event.get():
             if event.type == pg.QUIT:
@@ -73,25 +74,40 @@ def main():
                 break
             if event.type == pg.MOUSEMOTION:
                 mouse_pos = event.pos  # Координаты курсора
+            if event.type == pg.MOUSEBUTTONDOWN:
+                if 345 <= mouse_pos[0] <= 465 and 540 <= mouse_pos[1] <= 570:
+                    is_paused = not is_paused
+                    print("pause")
+                elif 345 <= mouse_pos[0] <= 465 and 580 <= mouse_pos[1] <= 610:
+                    # TODO: the end of the game
+                    print("break")
         keys = pg.key.get_pressed()
         if keys[pg.K_UP]:
             if last_keys != str(keys):
+                is_paused = False
                 current_figure_position_in_list = turn_figure(
                     cur_figure=current_figures,
                     pos_in_list=current_figure_position_in_list,
                     board=board
                 )
         if keys[pg.K_DOWN]:
+            is_paused = False
             move_figure(board=board, direction='down')
         if keys[pg.K_LEFT]:
+            is_paused = False
             if last_keys != str(keys):
                 move_figure(board=board, direction='left')
         if keys[pg.K_RIGHT]:
+            is_paused = False
             if last_keys != str(keys):
                 move_figure(board=board, direction='right')
+        if keys[pg.K_p]:
+            if last_keys != str(keys):
+                is_paused = not is_paused
         print(falling_counter % (1 / (INITIAL_SPEED_OF_FIGURE_FALLING + DELTA_SPEED_FOR_LEVEL * (level - 1))))
         if falling_counter % (round(1 / (INITIAL_SPEED_OF_FIGURE_FALLING + DELTA_SPEED_FOR_LEVEL * (level - 1)))) == 0:
-            move_figure(board=board, direction='down')
+            if not is_paused:
+                move_figure(board=board, direction='down')
         
         last_keys = str(keys)
         should_draw_new_figure = True
