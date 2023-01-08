@@ -26,6 +26,7 @@ def statistics_screen(screen):
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT:
+                screen.fill((0, 0, 0))
                 return
             
             draw_line_of_text("ТОП 10 игр по результату:", (255, 255, 255), 100, 10)
@@ -46,19 +47,5 @@ def statistics_screen(screen):
                     data.remove(m)
                     draw_line_of_text(f"{i + 1}. {m[0]} - {m[1]}", col, 10, 10 + (i + 1) * 20)
                 
-
-            # if event.type == pg.MOUSEMOTION:  # Выделение цветом кнопки, на которую наведён курсор
-            #     if 125 <= event.pos[0] <= 355 and 300 <= event.pos[1] <= 340:  # Проверки позиции курсора
-            #         draw_button(screen, START_SCREEN_BUTTONS[0], BUTTON_TARGETED_COLOR, font)
-            #     elif 125 <= event.pos[0] <= 355 and 370 <= event.pos[1] <= 410:
-            #         draw_button(screen, START_SCREEN_BUTTONS[1], BUTTON_TARGETED_COLOR, font)
-            #     elif 125 <= event.pos[0] <= 355 and 440 <= event.pos[1] <= 480:
-            #         draw_button(screen, START_SCREEN_BUTTONS[2], BUTTON_TARGETED_COLOR, font)
-            #     else:
-            #         for button in START_SCREEN_BUTTONS:
-            #             draw_button(screen, button, BUTTON_COLOR, font)
-
-            
-
         pg.display.flip()
         clock.tick(FPS)

@@ -31,7 +31,6 @@ def start_screen():  # Стартовое окно
 
     deco_font = pg.font.Font(None, 50)  # Декоративный текст сверху и снизу экрана
 
-
     while True:
         for event in pg.event.get():
         
@@ -57,10 +56,8 @@ def start_screen():  # Стартовое окно
                         statistics_screen(screen)
                     elif 440 <= event.pos[1] <= 480:
                         terminate()
-        screen.fill((0, 0, 0))
-        tetris_logo = pg.transform.scale(pg.image.load('data/tetris_logo.png'), TETRIS_LOGO_SIZE)
+
         # Загружаем логотип "Тетриса"
-        screen.blit(tetris_logo, (5, 75))  # Отображаем его на экране
 
         font = pg.font.Font(None, 40)  # Шрифт текста на кнопках
 
