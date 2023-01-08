@@ -1,7 +1,8 @@
-import pygame as pg
 import os
 import sys
-import sqlite3
+
+import pygame as pg
+from PyQt5.QtWidgets import QApplication
 
 import draw_figure
 from board import Board
@@ -14,21 +15,19 @@ from database import insert_score_in_database, create_bd, \
 from draw_button import draw_button
 from draw_figure import draw_figure
 from draw_text import draw_text
+from get_name_from_dialog import GetName
 from get_random_figure import get_random_figure
 from move_figure import move_figure
 from remove_filled_rows import remove_filled_rows
-from turn_figure import turn_figure
-from PyQt5.QtWidgets import QInputDialog
-from PyQt5.QtWidgets import QWidget, QApplication
-from get_name_from_dialog import GetName
 from terminate import terminate
+from turn_figure import turn_figure
 
 
 def main():
     """Function of game process"""
     if not os.path.exists("data.sqlite"):
         create_bd()
-
+    
     app = QApplication(sys.argv)
     name = GetName()
     name = name.get_name()
@@ -66,7 +65,7 @@ def main():
     # We will fall a figure not every iteration of loop
     falling_counter = 0
     last_keys = None
-
+    
     is_paused = False
     while running:
         for event in pg.event.get():
@@ -165,5 +164,6 @@ def main():
 if __name__ == '__main__':
     pg.init()
     from start_screen import start_screen
+    
     start_screen()
     pg.quit()
