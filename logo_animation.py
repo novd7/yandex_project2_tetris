@@ -1,4 +1,5 @@
 import pygame as pg
+from constants import TETRIS_LOGO_SIZE, GAME_OVER_SIZE
 
 
 def logo_animation(screen, iterations, logo_type):
