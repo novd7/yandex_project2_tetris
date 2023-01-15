@@ -2,11 +2,11 @@ import pygame as pg
 
 from constants import INDENT_LEFT, INDENT_TOP, \
     WIDTH_OF_PLAYGROUND, CELL_SIZE, TEXT_SIZE, \
-    TEXT_SCORE_COLOR, TEXT_SCORE_SIGN_COLOR, NEW_RECORD_COLOR
+    TEXT_SCORE_COLOR, TEXT_SCORE_SIGN_COLOR, NEW_RECORD_COLOR, DECO_TEXT_COLOR
 from database import get_max_score_by_name
 
 
-def draw_text(screen, score, level, name):
+def draw_text(screen, score, level, name, next_figure_text_color):
     """Function to draw text"""
     text_x = INDENT_LEFT + WIDTH_OF_PLAYGROUND * CELL_SIZE + INDENT_LEFT
     
@@ -38,7 +38,7 @@ def draw_text(screen, score, level, name):
     draw_line_of_text(str(max(res) if res else 0), NEW_RECORD_COLOR[0], text_y_result_num, 30)
     
     text_y_next = text_y_result_num + TEXT_SIZE + 20
-    draw_line_of_text("Следующая", TEXT_SCORE_SIGN_COLOR, text_y_next, 30)
+    draw_line_of_text("Следующая", DECO_TEXT_COLOR[next_figure_text_color], text_y_next, 30)
     
     text_y_figure = text_y_next + TEXT_SIZE
-    draw_line_of_text("фигура:", TEXT_SCORE_SIGN_COLOR, text_y_figure, 30)
+    draw_line_of_text("фигура:", DECO_TEXT_COLOR[next_figure_text_color], text_y_figure, 30)

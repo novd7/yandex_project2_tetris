@@ -15,6 +15,7 @@ INDENT_TOP = 10
 CELL_SIZE = 25
 CELL_COLOR = (30, 30, 30)
 MARKED_CELL_COLOR = (0, 140, 255)
+GRAVITY = 1
 
 TEXT_SCORE_SIZE = 24
 TEXT_SCORE_COLOR = (100, 255, 100)
@@ -33,6 +34,7 @@ BUTTON_TEXT_COLOR = (0, 0, 0)  # Цвет текста на кнопках
 DECO_TEXT_COLOR = ((98, 0, 196), (136, 17, 255), (178, 102, 255))  # Цвета декораций
 
 GAME_SCREEN_BUTTONS = (('Пауза', (345, 540, 120, 30), (35, 4)),  # (button_text, button_rect, text_indents)
+                       ('Продолжить', (345, 540, 120, 30), (2, 4)),
                        ('Конец игры', (345, 580, 120, 30), (8, 4)))
 
 GAME_OVER_SIZE = (309, 215)  # Размер надписи "GAME OVER"

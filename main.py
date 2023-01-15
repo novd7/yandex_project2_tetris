@@ -50,6 +50,10 @@ def main():
     next_figure_board.data = [[j if j == "x" else "" for j in i] for i in next_figure[0]]
     
     font = pg.font.Font(None, 27)  # Шрифт для кнопок "Пауза" и "Конец игры"
+
+    cycle_iterations = 0  # Подсчёт итераций цикла (для работы анимаций)
+    deco_color = 0  # Цвет надписи "Следующая фигура:"
+
     mouse_pos = (0, 0)  # Изначальные кординаты курсора
     
     current_figure_position_in_list = 0
@@ -144,19 +148,35 @@ def main():
         screen.fill(BACK_GROUND_COLOR)
         board.render()
         next_figure_board.render()
-        draw_text(screen, score, level, name)
+        draw_text(screen, score, level, name, deco_color)
         
-        # Отрисовка кнопок "Пауза" и "Конец игры"
-        if 345 <= mouse_pos[0] <= 465 and 540 <= mouse_pos[1] <= 570:  # Проверки позиции курсора
-            draw_button(screen, GAME_SCREEN_BUTTONS[0], BUTTON_TARGETED_COLOR, font)
-            draw_button(screen, GAME_SCREEN_BUTTONS[1], BUTTON_COLOR, font)
+        # Отрисовка кнопок "Пауза"/"Продолжить" и "Конец игры"
+        if 345 <= mouse_pos[0] <= 465 and 540 <= mouse_pos[1] <= 570:  # Проверки позиции курсора и отрисовка кнопок
+            if is_paused:
+                draw_button(screen, GAME_SCREEN_BUTTONS[1], BUTTON_TARGETED_COLOR, font)
+            else:
+                draw_button(screen, GAME_SCREEN_BUTTONS[0], BUTTON_TARGETED_COLOR, font)
+            draw_button(screen, GAME_SCREEN_BUTTONS[2], BUTTON_COLOR, font)
         elif 345 <= mouse_pos[0] <= 465 and 580 <= mouse_pos[1] <= 610:
-            draw_button(screen, GAME_SCREEN_BUTTONS[1], BUTTON_TARGETED_COLOR, font)
-            draw_button(screen, GAME_SCREEN_BUTTONS[0], BUTTON_COLOR, font)
+            if is_paused:
+                draw_button(screen, GAME_SCREEN_BUTTONS[1], BUTTON_COLOR, font)
+            else:
+                draw_button(screen, GAME_SCREEN_BUTTONS[0], BUTTON_COLOR, font)
+            draw_button(screen, GAME_SCREEN_BUTTONS[2], BUTTON_TARGETED_COLOR, font)
         else:
-            for button in GAME_SCREEN_BUTTONS:
-                draw_button(screen, button, BUTTON_COLOR, font)
-        
+            if is_paused:
+                draw_button(screen, GAME_SCREEN_BUTTONS[1], BUTTON_COLOR, font)
+            else:
+                draw_button(screen, GAME_SCREEN_BUTTONS[0], BUTTON_COLOR, font)
+            draw_button(screen, GAME_SCREEN_BUTTONS[2], BUTTON_COLOR, font)
+
+        cycle_iterations += 1
+        if cycle_iterations == 20:  # Цвет надписи "Следующая фигура" меняется на каждой 20-ой итерации цикла
+            deco_color += 1
+            if deco_color > 2:
+                deco_color = 0
+            cycle_iterations = 0
+
         pg.display.flip()
         clock.tick(FPS)
 
